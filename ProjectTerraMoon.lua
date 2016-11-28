@@ -30,7 +30,7 @@ Constants = class()
 
 function Constants:init()
     currentworld ="None"
-    rectMode(CENTER)
+    rectMode(CORNER)
     
     worlddepth = 100
     worldwidth = 100
@@ -53,6 +53,14 @@ function WorldGen:NewWorld(name, size)
         for column = 1, size.y do
             if column > 50 then
                 table.insert(worldtable[row], 1)
+            elseif column <= 50 and column >= 49 then
+                if column == 50 then 
+                    if worldtable[row][49] == 2 then
+                        table.insert(worldtable[row], math.random(1,2))
+                    end
+                else
+                    table.insert(worldtable[row], math.random(1,2))
+                end
             else
                 table.insert(worldtable[row], 2)
             end
@@ -91,11 +99,11 @@ function DrawWorld:Consistant()
         for i,v in pairs(currentworldtable) do
             for u,y in pairs(v) do
                 if y == 1 then
-                    fill(255, 0, 0, 255)
-                    rect(i*10, u*10, 11.5, 11.5)
+                    fill(0, 116, 255, 255)
+                    rect((i*10)-11.5, (u*10)-11.5, 11.5, 11.5)
                 else
-                    fill(54, 255, 0, 255)
-                    rect(i*10, u*10, 11.5, 11.5)
+                    fill(52, 139, 28, 255)
+                    rect((i*10)-11.5, (u*10)-11.5, 11.5, 11.5)
                 end
             end
         end
